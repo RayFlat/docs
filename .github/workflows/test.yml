@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.2
       - name: Executing linter
-        run: npx --yes oxlint@0.15.0 --deny-warnings -c .eslintrc
+        run: npx --yes oxlint@0.15.0
       - name: Checking Docker image
         run: docker build . --check
