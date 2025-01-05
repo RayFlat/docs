@@ -1,0 +1,17 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - name: Executing linter
+        run: npx --yes oxlint@0.15.0 --deny-warnings -c .eslintrc
+      - name: Checking Docker image
+        run: docker build . --check

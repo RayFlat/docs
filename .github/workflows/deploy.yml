@@ -1,0 +1,38 @@
+name: Deploy to Railway
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: oven-sh/setup-bun@v2.0.1
+
+      - name: Installing Railway
+        run: bash <(curl -fsSL cli.new) -y
+
+      - name: Installing dependencies
+        run: bun install
+
+      - name: Building project
+        run: bun run build
+
+      - name: Linking service
+        run: |
+          sed -i -e 's/.next/''/g' .gitignore
+          railway link -p $R_PROJECT_ID -s Docs
+        env:
+          RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }}
+          R_PROJECT_ID: e7e56a6f-2023-45ee-9a1c-2eadc6204f7c
+
+      - name: Deploying service
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
