@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "bun --run next",
-    "build": "next build",
-    "start": "next start"
+    "dev": "rm -rf .next && bun --run next dev",
+    "build": "bun --run next build",
+    "start": "bun --run next start"
   },
   "keywords": [],
   "author": "",
