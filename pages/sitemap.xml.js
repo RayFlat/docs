@@ -13,7 +13,7 @@ function generateSiteMap() {
             rel="alternate"
             hreflang="en"
             href="https://docs.rayflat.com/en" />
-        <lastmod>2025-01-06T15:11:42.571Z</lastmod>
+        <lastmod>2025-01-06T15:23:29.417Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
 </urlset>`;

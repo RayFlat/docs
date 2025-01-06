@@ -12,7 +12,7 @@ Allow: /en/
 User-agent: *
 Allow: /es/
 
-Sitemap: https://www.rayflat.com/metadata/sitemap.xml`;
+Sitemap: https://www.rayflat.com/sitemap.xml`;
 }
 
 function Robots() {
