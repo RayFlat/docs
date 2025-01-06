@@ -1,10 +1,10 @@
 function generateSiteMap() {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset
-    xmlns="http://docs.sitemaps.org/schemas/sitemap/0.9"
-    xmlns:xhtml="http://docs.w3.org/1999/xhtml">
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
-        <loc>https://docs.rayflat.com/en</loc>
+        <loc>https://docs.rayflat.com/es</loc>
         <xhtml:link
             rel="alternate"
             hreflang="es"
@@ -13,12 +13,10 @@ function generateSiteMap() {
             rel="alternate"
             hreflang="en"
             href="https://docs.rayflat.com/en" />
-        <lastmod>2025-01-05T23:09:02.363Z</lastmod>
+        <lastmod>2025-01-06T15:11:42.571Z</lastmod>
         <changefreq>daily</changefreq>
-        <priority>0.7</priority>
     </url>
-</urlset>
- `;
+</urlset>`;
 }
 
 function SiteMap() {
