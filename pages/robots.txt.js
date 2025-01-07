@@ -11,8 +11,11 @@ Allow: /en/
 # Spanish section rules
 User-agent: *
 Allow: /es/
+# Spanish section rules
+User-agent: *
+Allow: /es/Facturacion/suscripcion
 
-Sitemap: https://www.rayflat.com/sitemap.xml`;
+Sitemap: https://docs.rayflat.com/sitemap.xml`;
 }
 
 function Robots() {

@@ -13,7 +13,16 @@ function generateSiteMap() {
             rel="alternate"
             hreflang="en"
             href="https://docs.rayflat.com/en" />
-        <lastmod>2025-01-06T15:23:29.417Z</lastmod>
+        <lastmod>2025-01-07T17:00:51.499Z</lastmod>
+        <changefreq>daily</changefreq>
+    </url>
+     <url>
+        <loc>https://docs.rayflat.com/es/Facturacion/suscripcion</loc>
+        <xhtml:link
+            rel="alternate"
+            hreflang="es"
+            href="https://docs.rayflat.com/es/Facturacion/suscripcion" />
+        <lastmod>2025-01-07T17:00:51.499Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
 </urlset>`;
