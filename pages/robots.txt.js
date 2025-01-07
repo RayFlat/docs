@@ -6,12 +6,12 @@ Allow: /
 # English section rules
 User-agent: *
 Allow: /en/
-
+User-agent: *
+Allow: /en/Billing/subscription
 
 # Spanish section rules
 User-agent: *
 Allow: /es/
-# Spanish section rules
 User-agent: *
 Allow: /es/Facturacion/suscripcion
 

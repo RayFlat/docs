@@ -22,7 +22,11 @@ function generateSiteMap() {
             rel="alternate"
             hreflang="es"
             href="https://docs.rayflat.com/es/Facturacion/suscripcion" />
-        <lastmod>2025-01-07T17:00:51.499Z</lastmod>
+        <xhtml:link
+            rel="alternate"
+            hreflang="en"
+            href="https://docs.rayflat.com/en/Billing/subscription" />
+        <lastmod>2025-01-07T17:49:43.877Z</lastmod>
         <changefreq>daily</changefreq>
     </url>
 </urlset>`;
