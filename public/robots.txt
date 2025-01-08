@@ -7,11 +7,15 @@ User-agent: *
 Allow: /en/
 User-agent: *
 Allow: /en/Billing/subscription
+User-agent: *
+Allow: /en/Legal/privacy-policy
 
 # Spanish section rules
 User-agent: *
 Allow: /es/
 User-agent: *
 Allow: /es/Facturacion/suscripcion
+User-agent: *
+Allow: /es/Legal/politica-de-privacidad
 
 Sitemap: https://docs.rayflat.com/sitemap.xml
