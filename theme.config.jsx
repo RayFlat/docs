@@ -55,6 +55,22 @@ export default {
         <meta property="og:title" content={frontMatter.title} />
         <meta property="og:description" content={frontMatter.description} />
 
+        <meta
+          property="og:image"
+          content="https://docs.rayflat.com/preview.webp"
+        />
+        <meta property="og:image:width" content="5009" />
+        <meta property="og:image:height" content="2500" />
+
+        {/* TWITTER */}
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:image"
+          content="https://docs.rayflat.com/preview.webp"
+        />
+        <meta property="twitter:site" content="@rayflatapp" />
+
         <title>{frontMatter.title}</title>
         <meta name="description" content={frontMatter.description} />
       </>
