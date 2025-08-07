@@ -12,6 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.2.2
       - name: Executing linter
-        run: npx --yes oxlint@0.15.12
+        run: npx --yes oxlint@1.11.0
       - name: Checking Docker image
         run: docker build . --check
+ 
