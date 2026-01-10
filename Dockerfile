@@ -1,11 +1,13 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-FROM oven/bun:1.2.19-slim
+FROM oven/bun:1.3.5-slim
 
 WORKDIR /app
 
-COPY package.json bun.lock ./
+COPY package.json ./
+
+COPY bun.lock ./
 
 RUN bun install --frozen-lockfile
 
@@ -15,4 +17,4 @@ ENV NODE_ENV=production
 
 EXPOSE 8080
 
-CMD ["bun","run","start"]
+ENTRYPOINT ["bun","run","start"]
