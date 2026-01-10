@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      commit_sha:
+        description: "Commit SHA to deploy"
+        required: true
+        default: ""
+        
 jobs:
   test:
     uses: ./.github/workflows/test.yml
@@ -12,18 +19,28 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.2.2
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Checkout specific commit if provided
+        if: ${{ github.event.inputs.commit_sha != '' }}
+        run: git checkout ${{ github.event.inputs.commit_sha }}
+        
       - uses: oven-sh/setup-bun@v2.0.1
 
       - name: Installing Railway
         run: bash <(curl -fsSL cli.new) -y
 
       - name: Installing dependencies
-        run: bun install
+        run: bun install --frozen-lockfile
 
       - name: Building project
-        run: bun run build
-
+        run: bun run --bun build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1
+          
       - name: Linking service
         run: |
           sed -i -e 's/.next/''/g' .gitignore
