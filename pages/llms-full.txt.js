@@ -7,7 +7,7 @@ function FulltextDoc() {
 }
 
 export async function getServerSideProps({ req, res }) {
-  const { NEXT_LOCALE } = parseCookies(req.headers.cookie);
+  const { NEXT_LOCALE = "" } = parseCookies(req.headers.cookie);
 
   const docsDir = path.join(process.cwd(), `pages/${NEXT_LOCALE}`);
 

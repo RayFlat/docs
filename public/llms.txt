@@ -1,0 +1,6 @@
+# RayFlat
+RayFlat is an AI-powered platform designed to simplify access to and understanding of salvadoran legislation. It streamlines legal research, saving users time and effort.
+
+
+## Complete documentation
+- [Full site content](https://docs.rayflat.com/llms-full.txt): This file contains all the information in Markdown format for comprehensive reading.
