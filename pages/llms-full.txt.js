@@ -47,7 +47,7 @@ function FulltextDoc() {
 export async function getServerSideProps({ req, res }) {
   const { NEXT_LOCALE } = parseCookies(req.headers.cookie);
 
-  const docsDir = path.join(process.cwd(), `pages`);
+  const docsDir = path.join(process.cwd(), `pages/${NEXT_LOCALE}`);
 
   const files = getMdxFiles(docsDir);
 
@@ -60,7 +60,7 @@ export async function getServerSideProps({ req, res }) {
 
   files.forEach((file) => {
     const path = file.path
-      .split("/workspaces/docs/pages/")[1]
+      .split("/docs/pages/")[1]
       .replace(/\\/g, "/")
       .replace(".mdx", "")
       .replace(/\/index$/, "");
