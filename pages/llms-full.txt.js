@@ -59,6 +59,8 @@ export async function getServerSideProps({ req, res }) {
 
   files.forEach((file) => {
     const path = file.path
+      .split("/")[1]
+      .replace(/\\/g, "/")
       .replace(".mdx", "")
       .replace(/\/index$/, "");
 
