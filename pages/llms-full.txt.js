@@ -2,6 +2,49 @@ import fs from "fs";
 import path from "path";
 import process from "process";
 
+function FulltextDoc() {
+  // getServerSideProps will do the heavy lifting
+}
+
+export async function getServerSideProps({ req, res }) {
+  const { NEXT_LOCALE } = parseCookies(req.headers.cookie);
+
+  const docsDir = path.join(process.cwd(), `pages/${NEXT_LOCALE}`);
+
+  const files = getMdxFiles(docsDir);
+
+  let content = "";
+
+  const host = req.headers.host; // example: "localhost:3000" or "www.example.com"
+
+  const protocol = req.headers["x-forwarded-proto"] || "https";
+  const domain = `${protocol}://${host}`;
+
+  const CURRENT_DIRECTORY = process.cwd();
+
+  files.forEach((file) => {
+    const path = file.path
+      .split(`${CURRENT_DIRECTORY}/pages/`)[1]
+      .replace(/\\/g, "/")
+      .replace(".mdx", "")
+      .replace(/\/index$/, "");
+
+    content += `\n\n---\n\n# File: ${domain}/${path}\n\n`;
+    content += file.content;
+  });
+
+  res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  // we send the XML to the browser
+  res.write(content);
+  res.end();
+
+  return {
+    props: {},
+  };
+}
+
+export default FulltextDoc;
+
 function getMdxFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);
 
@@ -39,46 +82,3 @@ function parseCookies(cookieHeader) {
   }
   return cookies;
 }
-
-function FulltextDoc() {
-  // getServerSideProps will do the heavy lifting
-}
-
-export async function getServerSideProps({ req, res }) {
-  const { NEXT_LOCALE } = parseCookies(req.headers.cookie);
-
-  const docsDir = path.join(process.cwd(), `pages/${NEXT_LOCALE}`);
-
-  const files = getMdxFiles(docsDir);
-
-  let content = "";
-
-  const host = req.headers.host; // example: "localhost:3000" or "www.example.com"
-
-  const protocol = req.headers["x-forwarded-proto"] || "https";
-  const domain = `${protocol}://${host}`;
-
-  const CURRENT_DIRECTORY = process.cwd();  
-
-  files.forEach((file) => {
-    const path = file.path
-      .split(`${CURRENT_DIRECTORY}/pages/`)[1]
-      .replace(/\\/g, "/")
-      .replace(".mdx", "")
-      .replace(/\/index$/, "");
-
-    content += `\n\n---\n\n# File: ${domain}/${path}\n\n`;
-    content += file.content;
-  });
-
-  res.setHeader("Content-Type", "text/plain; charset=utf-8");
-  // we send the XML to the browser
-  res.write(content);
-  res.end();
-
-  return {
-    props: {},
-  };
-}
-
-export default FulltextDoc;
