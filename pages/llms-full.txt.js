@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 
-// Función recursiva para obtener todos los archivos .mdx
 function getMdxFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);
 
