@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import process from "process";
 
 function getMdxFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);
@@ -57,15 +58,14 @@ export async function getServerSideProps({ req, res }) {
   const protocol = req.headers["x-forwarded-proto"] || "https";
   const domain = `${protocol}://${host}`;
 
+  const CURRENT_DIRECTORY = process.cwd();  
+
   files.forEach((file) => {
     const path = file.path
-      .split("/app/pages/")[1]
-      .split("/")[1]
+      .split(`${CURRENT_DIRECTORY}/pages/`)[1]
       .replace(/\\/g, "/")
       .replace(".mdx", "")
       .replace(/\/index$/, "");
-
-    console.log(file.path);
 
     content += `\n\n---\n\n# File: ${domain}/${path}\n\n`;
     content += file.content;
