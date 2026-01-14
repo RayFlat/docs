@@ -65,6 +65,8 @@ export async function getServerSideProps({ req, res }) {
       .replace(".mdx", "")
       .replace(/\/index$/, "");
 
+    console.log(file.path);
+
     content += `\n\n---\n\n# File: ${domain}/${path}\n\n`;
     content += file.content;
   });
