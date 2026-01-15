@@ -14,7 +14,10 @@ jobs:
       - uses: oven-sh/setup-bun@v2.0.2
       
       - name: Executing linter
-        run: bunx oxlint@1.30.0
+        run: bunx oxlint@1.39.0
+
+      - name: Checking build
+        run: bun run --bun build
         
       - name: Checking Docker image
         run: docker build . --check
