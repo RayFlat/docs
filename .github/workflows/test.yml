@@ -16,6 +16,8 @@ jobs:
       - name: Executing linter
         run: bunx oxlint@1.39.0
 
+      - name: Installing dependencies
+        run: bun install --frozen-lockfile
       - name: Checking build
         run: bun run --bun build
         
