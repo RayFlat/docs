@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs/promises";
 import path from "path";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -7,9 +7,7 @@ export async function GET(request: NextRequest) {
 
   const docsDir = path.join(process.cwd(), `content/${cookieLocale}`);
 
-  const files = getMdxFiles(docsDir);
-
-  let content = "";
+  const files = await getMdxFiles(docsDir);
 
   const host = request.headers.get("host") || "docs.rayflat.com";
   const protocol = request.headers.get("x-forwarded-proto") || "https";
@@ -17,16 +15,15 @@ export async function GET(request: NextRequest) {
 
   const CURRENT_DIRECTORY = process.cwd();
 
-  files.forEach((file) => {
+  const content = files.map((file) => {
     const filePath = file.path
       .split(`${CURRENT_DIRECTORY}/content/`)[1]
-      .replace(/\\/g, "/")
-      .replace(".mdx", "")
+      .replace(/[\\/]/g, "/")
+      .replace(/\.mdx$/, "")
       .replace(/\/index$/, "");
 
-    content += `\n\n---\n\n# File: ${domain}/${filePath}\n\n`;
-    content += file.content;
-  });
+    return `\n\n---\n\n# File: ${domain}/${filePath}\n\n${file.content}`;
+  }).join("");
 
   return new NextResponse(content, {
     status: 200,
@@ -41,22 +38,23 @@ interface FileInfo {
   content: string;
 }
 
-function getMdxFiles(dir: string, fileList: FileInfo[] = []): FileInfo[] {
-  const files = fs.readdirSync(dir);
+async function getMdxFiles(dir: string, fileList: FileInfo[] = []): Promise<FileInfo[]> {
+  const files = await fs.readdir(dir);
 
-  files.forEach((file) => {
+  for (const file of files) {
     const filePath = path.join(dir, file);
-    const stat = fs.statSync(filePath);
+    const stat = await fs.stat(filePath);
 
     if (stat.isDirectory()) {
-      getMdxFiles(filePath, fileList);
+      await getMdxFiles(filePath, fileList);
     } else if (file.endsWith(".mdx")) {
+      const content = await fs.readFile(filePath, "utf-8");
       fileList.push({
         path: filePath,
-        content: fs.readFileSync(filePath, "utf-8"),
+        content,
       });
     }
-  });
+  }
 
   return fileList;
 }
