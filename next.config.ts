@@ -1,13 +1,11 @@
 import nextra from "nextra";
 
 const withNextra = nextra({
-  theme: "nextra-theme-docs",
-  themeConfig: "./theme.config.jsx",
-});
-
-export default withNextra({
-  i18n: {
-    locales: ["en", "es"],
-    defaultLocale: "es",
+  contentDirBasePath: "/",
+  latex: true,
+  search: {
+    codeblocks: false,
   },
 });
+
+export default withNextra({});

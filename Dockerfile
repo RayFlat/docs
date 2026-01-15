@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-FROM oven/bun:1.3.5-slim
+FROM oven/bun:1.3.6-slim
 
 WORKDIR /app
 
