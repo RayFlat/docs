@@ -9,6 +9,10 @@ User-agent: *
 Allow: /en/Billing/subscription
 User-agent: *
 Allow: /en/Legal/privacy-policy
+User-agent: *
+Allow: /llms.txt
+User-agent: *
+Allow: /llms-full.txt
 
 # Spanish section rules
 User-agent: *
